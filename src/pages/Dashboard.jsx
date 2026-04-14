@@ -5,6 +5,9 @@ import BankAccounts from '../components/BankAccounts'
 import Investments from '../components/Investments'
 import Income from '../components/Income'
 import Summary from '../components/Summary'
+import MonthlyExpenses from '../components/MonthlyExpenses'
+import AssetTracking from '../components/AssetTracking'
+import BonusManagement from '../components/BonusManagement'
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('summary')
@@ -30,8 +33,11 @@ export default function Dashboard() {
 
   const tabs = [
     { id: 'summary', label: '概要' },
+    { id: 'monthly', label: '生活費' },
     { id: 'bank', label: '銀行・現金' },
     { id: 'investment', label: '投資' },
+    { id: 'asset-tracking', label: '資産推移' },
+    { id: 'bonus', label: '賞与' },
     { id: 'income', label: '収入管理' },
   ]
 
@@ -83,8 +89,11 @@ export default function Dashboard() {
       {/* コンテンツ */}
       <main className="max-w-4xl mx-auto px-4 py-6">
         {activeTab === 'summary' && <Summary />}
+        {activeTab === 'monthly' && <MonthlyExpenses />}
         {activeTab === 'bank' && <BankAccounts />}
         {activeTab === 'investment' && <Investments />}
+        {activeTab === 'asset-tracking' && <AssetTracking />}
+        {activeTab === 'bonus' && <BonusManagement />}
         {activeTab === 'income' && <Income />}
       </main>
     </div>
