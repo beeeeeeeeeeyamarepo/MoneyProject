@@ -78,8 +78,8 @@ export default function MonthlyExpenses() {
 
     const fixedSet = new Set(FIXED_EXP_CATS)
     const extraCats = [...new Set([
-      ...(eN || []).filter(e => \!fixedSet.has(e.category)).map(e => e.category),
-      ...(eX || []).filter(e => \!fixedSet.has(e.category)).map(e => e.category),
+      ...(eN || []).filter(e => !fixedSet.has(e.category)).map(e => e.category),
+      ...(eX || []).filter(e => !fixedSet.has(e.category)).map(e => e.category),
     ])]
     setExtraExp(extraCats.map(c => ({
       category: c,
@@ -111,27 +111,27 @@ export default function MonthlyExpenses() {
     ])
 
     const iNowRows = [
-      ...balances.filter(b => b.amount \!== '').map(b => ({
+      ...balances.filter(b => b.amount !== '').map(b => ({
         user_id: uid, year, month, category: b.category, amount: Number(b.amount)
       })),
-      ...(salaryNow \!== '' ? [{
+      ...(salaryNow !== '' ? [{
         user_id: uid, year, month, category: SALARY_CAT, amount: Number(salaryNow)
       }] : []),
     ]
     const iNextRows = [
-      ...(salaryNext \!== '' ? [{
+      ...(salaryNext !== '' ? [{
         user_id: uid, year: n.year, month: n.month, category: SALARY_CAT, amount: Number(salaryNext)
       }] : []),
-      ...planned.filter(p => p.amount \!== '').map(p => ({
+      ...planned.filter(p => p.amount !== '').map(p => ({
         user_id: uid, year: n.year, month: n.month, category: p.category, amount: Number(p.amount)
       })),
     ]
 
     const allExpItems = [...fixedExp, ...extraExp]
-    const eNowRows  = allExpItems.filter(e => e.now  \!== '').map(e => ({
+    const eNowRows  = allExpItems.filter(e => e.now  !== '').map(e => ({
       user_id: uid, year, month, category: e.category, amount: Number(e.now)
     }))
-    const eNextRows = allExpItems.filter(e => e.next \!== '').map(e => ({
+    const eNextRows = allExpItems.filter(e => e.next !== '').map(e => ({
       user_id: uid, year: n.year, month: n.month, category: e.category, amount: Number(e.next)
     }))
 
@@ -167,12 +167,12 @@ export default function MonthlyExpenses() {
   }
 
   const addPlanned = () => {
-    if (\!newPlanCat.trim()) return
+    if (!newPlanCat.trim()) return
     setPlanned([...planned, { category: newPlanCat.trim(), amount: newPlanAmt }])
     setNewPlanCat(''); setNewPlanAmt('')
   }
   const addExpItem = () => {
-    if (\!newExpCat.trim()) return
+    if (!newExpCat.trim()) return
     setExtraExp([...extraExp, { category: newExpCat.trim(), now: '', next: '' }])
     setNewExpCat('')
   }
@@ -250,7 +250,7 @@ export default function MonthlyExpenses() {
                 <div className="flex items-center gap-1">
                   <label className="text-xs text-gray-600 flex-1">{item.category}</label>
                   <button
-                    onClick={() => setPlanned(planned.filter((_, j) => j \!== i))}
+                    onClick={() => setPlanned(planned.filter((_, j) => j !== i))}
                     className="text-gray-300 hover:text-red-400 text-xs"
                   >✕</button>
                 </div>
@@ -315,7 +315,7 @@ export default function MonthlyExpenses() {
               <div className="flex items-center gap-1">
                 <label className="text-xs text-gray-600 flex-1">{item.category}</label>
                 <button
-                  onClick={() => setExtraExp(extraExp.filter((_, j) => j \!== i))}
+                  onClick={() => setExtraExp(extraExp.filter((_, j) => j !== i))}
                   className="text-gray-300 hover:text-red-400 text-xs"
                 >✕</button>
               </div>
