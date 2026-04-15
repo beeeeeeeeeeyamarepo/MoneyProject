@@ -66,7 +66,7 @@ export default function MonthlyExpenses() {
     const knownCats = new Set([...BALANCE_CATS, SALARY_CAT])
     setPlanned(
       (iX || [])
-        .filter(i => \!knownCats.has(i.category))
+        .filter(i => !knownCats.has(i.category))
         .map(i => ({ category: i.category, amount: String(i.amount) }))
     )
 
